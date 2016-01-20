@@ -15,10 +15,10 @@ body {
   background-color: #fff; }
 
 .reveal {
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
-  font-size: 38px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 14pt;
   font-weight: normal;
-  color: #222; }
+  color: #7c7c7b; }
 
 ::selection {
   color: #fff;
@@ -40,8 +40,8 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #222;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  color: #ea5b0a;
+  font-family: "Campton Bold ", "Trebuchet MS Bold", sans-serif;
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: normal;
@@ -50,16 +50,16 @@ body {
   word-wrap: break-word; }
 
 .reveal h1 {
-  font-size: 2.5em; }
+  font-size: 36pt; }
 
 .reveal h2 {
-  font-size: 1.6em; }
+  font-size: 16pt; }
 
 .reveal h3 {
-  font-size: 1.3em; }
+  font-size: 14pt; }
 
 .reveal h4 {
-  font-size: 1em; }
+  font-size: 14pt; }
 
 .reveal h1 {
   text-shadow: none; }
