@@ -96,13 +96,19 @@ body {
   list-style-type: decimal; }
 
 .reveal ul {
-  list-style-type: disc; }
+  list-style-type: none; }
+
+.reveal ul li:before {
+    content: "\002022";
+    color: #ea5b0a;
+    padding-right:7px;
+}
 
 .reveal ul ul {
-  list-style-type: square; }
+  list-style-type: none; }
 
 .reveal ul ul ul {
-  list-style-type: circle; }
+  list-style-type: none; }
 
 .reveal ul ul,
 .reveal ul ol,
