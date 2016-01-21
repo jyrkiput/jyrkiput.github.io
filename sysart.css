@@ -18,7 +18,9 @@ body {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   font-size: 14pt;
   font-weight: normal;
-  color: #7c7c7b; }
+  color: #7c7c7b;
+  position: initial;
+ }
 
 ::selection {
   color: #fff;
