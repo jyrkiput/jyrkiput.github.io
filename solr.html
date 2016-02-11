@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Solr - hakukone</title>
+
+		<meta name="description" content="Solr - hakukone">
+		<meta name="author" content="Jyrki Puttonen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="sysart.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-state="title">
+					<h1>Solr</h1>
+					<h3>Hakumoottori</h3>
+				</section>
+				<section>
+					<h2>Yleistä</h2
+					<p>Solr on konfiguroitava, skaalautuva hakumoottori.</p>
+					<p>Toteutettu Javalla.</p>
+					<p>Dokumenttitietokanta</p>
+				</section>
+				<section>
+					<h2>Ominaisuuksia</h2
+					<ul>
+						<li>Kehittyneet tekstihaut</li>
+						<li>Monikielisyys</li>
+						<li>Mahdollisuus tallentaa lisätietoja</li>
+						<li>Lähes reaaliaikainen päivitys</li>
+						<li>HTTP, XML, JSON</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Analysointi</h2>
+					<p>Syötetty teksti analysoidaan ennen tallentamista tietokantaan.</p>
+					<p>Ensin teksti pilkotaan osiin, ja tämän jälkeen osille suoritetaan toimintoja</p>
+					<p>Analysointi voidaan määritellä erikseen hakuun ja indeksointiin.</p>
+				</section>
+				<section>
+					<h2>Analysointi</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Toiminto</th>
+								<th>Sana</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>StandardTokenizer</td>
+								<td>Verokortin</td>
+							</tr>
+							<tr>
+								<td>LowerCaseFilter</td>
+								<td>verokortin</td>
+							</tr>
+							<tr>
+								<td>MorphologyFilter (sukija)</td>
+								<td>verokortti</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h2>Dokumentin tallennus</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>dokumentti</th>
+								<th>teksti</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>A</td>
+								<td>Verokortin palautus tapahtuu</td>
+							</tr>
+							<tr>
+								<td>B</td>
+								<td>Verokortti toimitetaan</td>
+							</tr>
+						</tbody>
+					</table>
+					<p>Syntyvä indeksi</p>
+					<table>
+						<thead>
+							<tr>
+								<th>Avain</th>
+								<th>Dokumenti<t/th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>verokortti</td>
+								<td>A, B</td>
+							</tr>
+							<tr>
+								<td>palautus</td>
+								<td>A</td>
+							</tr>
+							<tr>
+								<td>tapahtua</td>
+								<td>A</td>
+							</tr>
+							<tr>
+								<td>toimittaa</td>
+								<td>B</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h2>Haku</h2>
+					<p>Haun yhteydessä tapahtuu analysointi</p>
+					<p>Analysoinnin tulosten perusteella haetaan dokumentit</p>
+					<p>Dokumentit pisteytetään ja esitetään pistejärjestyksessä</p>
+				</section>
+				<section>
+					<h2>Dokumentin tiedot</h2>
+					<p>Dokumentissa voi olla useita eri kenttiä, jotka voidaan analysoida eri tavoin</p>
+					<p>Kenttiä voidaan käyttää rajaamaan hakutulosta, esimerkiksi kielen mukaan</p>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+    <div id="sysart" style="background-image: url('theme_images/sysart.png');
+                          background-repeat: no-repeat;
+                          position: absolute;
+                          bottom: 20px;
+                          right: 120px;
+                          height: 60px;
+                          width: 255px;"></div>
+
+	</body>
+</html>
