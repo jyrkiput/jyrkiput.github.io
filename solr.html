@@ -94,6 +94,11 @@
 					</table>
 				</section>
 				<section>
+					<h2>Dokumentin tiedot</h2>
+					<p>Dokumentissa voi olla useita eri kenttiä, jotka voidaan analysoida eri tavoin</p>
+					<p>Kenttiä voidaan käyttää rajaamaan hakutulosta, esimerkiksi kielen mukaan</p>
+				</section>
+				<section>
 					<h2>Dokumentin tallennus</h2>
 					<table>
 						<thead>
@@ -143,15 +148,12 @@
 				</section>
 				<section>
 					<h2>Haku</h2>
+					<p>Solr sisältää useita erilaisia hakuparsereita</p>
 					<p>Haun yhteydessä tapahtuu analysointi</p>
 					<p>Analysoinnin tulosten perusteella haetaan dokumentit</p>
 					<p>Dokumentit pisteytetään ja esitetään pistejärjestyksessä</p>
 				</section>
-				<section>
-					<h2>Dokumentin tiedot</h2>
-					<p>Dokumentissa voi olla useita eri kenttiä, jotka voidaan analysoida eri tavoin</p>
-					<p>Kenttiä voidaan käyttää rajaamaan hakutulosta, esimerkiksi kielen mukaan</p>
-				</section>
+
 				<section>
 					<h2>Muita ominaisuuksia</h2>
 					<ul>
@@ -170,6 +172,540 @@
 					<p>Schema kuvaa dokumentin kenttien nimet, tyypit, miten ne tallennetaan ja miten ne analysoidaan</p>
 					<p>Määritellään schema.xml -tiedostossa</p>
 				</section>
+				<section>
+					<h2>Shema</h2>
+					<h3>Unique Key</h3>
+					<pre><code>
+<uniqueKey>id</uniqueKey>
+						</code></pre>
+					<p>Unique key ei ole pakollinen, mutta usein käytetty</p>
+					<p>Tarvitaan seuraavissa tapauksissa
+						<ul>
+							<li>Dokumenttien inkrementaalinen lisääminen</li>
+							<li>Alijoukkojen määritys</li>
+							<li>Dokumenttien jakaminen toisten tietokantojen kanssa</li>
+							<li>Dokumentin identiteetin muuttaminen (keinotekoinen avain)</li>
+							<li>Useita hakuja samaan dokumenttiin</li>
+							<li>Hajautus</li>
+						</ul>
+					</p>
+				</section>
+				<section>
+					<h2>Shema</h2>
+					<h3>Kentän määritys</h3>
+					<pre><code>
+<field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true" /></field>
+						</code></pre>
+					<table>
+						<thead>
+							<tr>
+								<th>nimi</th>
+								<th>tarkoitus</th>
+								<th>arvojoukko</th>
+								<th>oletusarvo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>name</td>
+								<td>Kentän nimi</td>
+								<td>alphanumeerinen, alaviivat</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>type</td>
+								<td>Kentän tyyppi. Tyypit määritellään schemassa erikseen</td>
+								<td>vastaava määritys on löydyttävä</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>default</td>
+								<td>Oletusarvo</td>
+								<td>Kentän tyyppiä vastaava</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>indexed</td>
+								<td>indeksoidaanko kenttä, eli voidaanko käyttää hauissa</td>
+								<td>true/false</td>
+								<td>true</td>
+							</tr>
+							<tr>
+								<td>stored</td>
+								<td>Tallennetaanko arvo, eli voidaanko arvo palauttaa</td>
+								<td>true/false</td>
+								<td>true</td>
+							</tr>
+							<tr>
+								<td>multivalued</td>
+								<td>Voiko samassa dokumentissa olla useita arvoja tälle kentälle</td>
+								<td>true/false</td>
+								<td>false</td>
+							</tr>
+							<tr>
+								<td>required</td>
+								<td>onko kenttä pakollinen</td>
+								<td>true/false</td>
+								<td>false</td>
+							</tr>
+							<tr>
+								<td>sortMissingFirst, sortMissingLast</td>
+								<td>Jos kenttä puuttuu, palautetaanko viimeisenä vai ensimmäisenä. Toimii vain tietyillä kenttätyypeillä</td>
+								<td>true/false</td>
+								<td>false</td>
+							</tr>
+						</tbody>
+					</table>
+					<p>omitNorms, omitTermFreqAndPositions, omitPositions, termVectors, termPositions, termOffsets, termPayloads...</p>
+				</section>
+				<section>
+					<h2>Dynaamiset kentät</h2>
+					<pre><code>
+<dynamicField name="*_txt_fi" type="text_fi" indexed="true" stored="false"/></dynamicField>
+						</code></pre>
+						<p>Dynaaminen kenttä toimii kuten tavallinen kenttä, mutta nimessä on villikortti</p>
+						<p>Erittäin hyödyllisiä</p>
+				</section>
+				<section>
+					<h2>Kentän kopiointi</h2>
+					<pre><code>
+<copyField source="*_txt_fi" dest="simple_fi"/></copyField>
+<copyField source="*_txt_fi" dest="*_txt_fi_2"/></copyField>
+						</code></pre>
+						<p>Kopioi kenttiä toisille nimille<p>
+						<p>Mahdollistaa saman tiedon indeksoimisen useilla eri tavoilla</p>
+				</section>
+				<section>
+					<h2>Shema</h2>
+					<h3>Kenttätyypin määritys</h3>
+					<pre><code>
+<fieldType name="string" class="solr.StrField" sortMissingLast="true"><analyzer>...</analyzer></fieldType>
+						</code></pre>
+					<table>
+						<thead>
+							<tr>
+								<th>nimi</th>
+								<th>tarkoitus</th>
+								<th>arvojoukko</th>
+								<th>oletusarvo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>name</td>
+								<td>Kenttätyypin nimi</td>
+								<td>alphanumeerinen, alaviivat</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>class</td>
+								<td>Kentän luokka</td>
+								<td>Solr sisältää käytettäviä luokkia</td>
+								<td>-</td>
+							</tr>
+
+						</tbody>
+					</table>
+					<p>positionIncrementGap, autoGeneratePhraseQueries, docValuesFormat, postingsFormat</p>
+					<p>Myös oletusarvot kentän määrityksessä oleville asioille.</p>
+				</section>
+				<section>
+					<h2>Schema</h2>
+					<h3>Analysoinnin määritys</h2>
+					<p>analysointi tutkii syötteitä sekä indeksoinnin että haun aikana</p>
+					<p>Teksti tutkitaan, pilkotaan osiin ja osia tarvittaessa muokataan, poistetaan ja lisätään</p>
+					<p>Analysointi voi tapahtua yhdellä luokalla, tai Tokenizerin ja Filtereiden linjastona</p>
+					<p>Voidaan määrittää erikseen indeksoinnille ja haulle</p>
+				</section>
+				<section>
+					<h2>Schema</h2>
+					<h3>Analysoinnin määritys</h2>
+						<pre><code>
+<fieldType name="text_fi" class="solr.TextField" positionIncrementGap="100">
+  <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory"/></tokenizer>
+      <filter class="solr.LowerCaseFilterFactory"/></filter>
+      <filter class="solr.StopFilterFactory" format="snowball" words="lang/stopwords_fi.txt" ignoreCase="true"/></filter>
+    <filter class="peltomaa.sukija.malaga.MalagaMorphologyFilterFactory"
+         malagaProjectFile="${solr.install.dir:../../../..}/server/solr/vero24/sukija/suomi.pro"
+         succestionFile="${solr.install.dir:../../../..}/server/solr/vero24/sukija/suggestions.xml">
+    </filter>
+  </analyzer>
+</fieldType>
+					</code></pre>
+			</section>
+
+			<section>
+				<h2>Schema</h2>
+				<h3>Mitä tapahtuu?</h2>
+				<p>Dokumentti A: Verokortin ja verotodistuksen palautus tapahtuu</p>
+				<p class="fragment"><code>StandardTokenizerFactory</code></p>
+				<p class="fragment">"Verokortin", "ja", "verotodistuksen", "palautus", "tapahtuu"</p>
+				<p class="fragment"><code>LowerCaseFilterFactory</code></p>
+				<p class="fragment">"verokortin", "ja", "verotodistuksen", "palautus", "tapahtuu"</p>
+				<p class="fragment"><code>StopFilterFactory</code></p>
+				<p class="fragment">"verokortin", "verotodistuksen", "palautus", "tapahtuu"</p>
+				<p class="fragment"><code>MalagaMorphologyFilterFactory</code></p>
+				<p class="fragment">"verokortti", "verotodistus", "palautus", "tapahtua"</p>
+			</section>
+			<section>
+				<h2>Schema</h2>
+				<h3>Syntynyt indeksi</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Avain</th>
+								<th>Dokumentti<t/th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>verokortti</td>
+								<td>A</td>
+							</tr>
+							<tr>
+								<td>verotodistus</td>
+								<td>A</td>
+							</tr>
+							<tr>
+								<td>palautus</td>
+								<td>A</td>
+							</tr>
+							<tr>
+								<td>tapahtua</td>
+								<td>A</td>
+							</tr>
+						</tbody>
+					</table>
+			</section>
+			<section>
+				<h2>Schema</h2>
+				<h3>Analysoinnin määritys</h2>
+				<p>Solr sisältää paljon valmiita tokenizereita ja filtereitä</p>
+				<p>Mahdollista tehdä uusia</p>
+				<p>Huomionarvoisia:
+					<ul>
+						<li>Edge N-Gram Filter</li>
+						<li>Synonym Filter</li>
+						<li>Phonetic Filter</li>
+					</ul>
+			</section>
+			<section>
+				<h2>Indeksointi</h2>
+				<div>
+					<div style="display: inline-block; vertical-align: top;">
+						<p>Solr voi indeksoida dokumentteja useilla eri tavoilla
+							<ul>
+								<li>Natiivikirjastot (Java, javascript, python, php, perl...)</li>
+								<li>XML tiedostot</li>
+								<li>Solr Cell with Tika</li>
+							</ul>
+						</p>
+						<p>Indeksointi kulkee analysaattoreiden läpi</p>
+				  </div>
+					<div style="display: inline-block;">
+					  <img src="solr_images/analyzer.svg" style="border: 0px;"/>
+					</div>
+			  </div>
+			</section>
+
+			<section>
+				<h2>Haku</h2>
+				<div>
+					<div style="display: inline-block; vertical-align: top;">
+						<p>Hakulauseke käsitellään hakuparserilla</p>
+						<p>Haku voidaan kohdistaa tiettyihin kenttiin</p>
+						<p>Kentille voidaan määrittää painoarvoja</p>
+						<p>Dokumentit pisteytetään</p>
+						<p>Haku kulkee analysaattoreiden läpi</p>
+				  </div>
+					<div style="display: inline-block;">
+					  <img src="solr_images/query_flow.svg" style="border: 0px;"/>
+					</div>
+			</section>
+
+			<section>
+				<h2>Hakuparserit</h2>
+				<p>Solr sisältää useita eri hakuparsereita, joilla on erilaisia ominaisuuksia</p>
+				<p>Hakuparsereiden toimintaa säädetään parametreillä, käytetään "name=value"</p>
+				<p> Yhteisiä parametrejä
+				<table>
+					<thead>
+						<tr>
+							<th>Nimi</th>
+							<th>Kuvaus<t/th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>defType</td>
+							<td>Mitä parseria käytetään, oletuksena "lucene"</td>
+						</tr>
+						<tr>
+							<td>sort</td>
+							<td>Tuloksen järjestys. Järjestykseen voidaan käyttää pisteytystä tai dokumentin kenttiä tietyin ehdoin</td>
+						</tr>
+						<tr>
+							<td>start</td>
+							<td>Monennesta tuloksesta alkaen</td>
+						</tr>
+						<tr>
+							<td>rows</td>
+							<td>Kuinka monta tulosta palautetaan</td>
+						</tr>
+						<tr>
+							<td>fq</td>
+							<td>filter query. Määrittää kyselyn joka rajaa tuloksia, esim "fq=lang:fi". Voidaan määrittää useita kertoja</td>
+						</tr>
+						<tr>
+							<td>fl</td>
+							<td>Palautettavat kentät. Voi lisäksi sisältää mm. funktioita</td>
+						</tr>
+						<tr>
+							<td>wt</td>
+							<td>Miten vastaus palautetaan (JSON, XML, Velocity)</td>
+						</tr>
+						<tr>
+							<td>debug</td>
+							<td>Debug tiedon lisäys. Mahdollisia arvoja ovat query, timing, results ja all (tai true)</td>
+						</tr>
+					</tbody>
+				</table>
+			</p>
+			</section>
+
+			<section>
+				<h2>Standard Query Parser</h2>
+				<p>Käyttää lucenen kyselykieltä</p>
+				<p>Parametrejä
+				<table>
+					<thead>
+						<tr>
+							<th>Nimi</th>
+							<th>Kuvaus<t/th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>q</td>
+							<td>Kysely</td>
+						</tr>
+						<tr>
+							<td>q.op</td>
+							<td>Miten useat kyselyt yhdistetään, AND tai OR</td>
+						</tr>
+						<tr>
+							<td>df</td>
+							<td>Oletuksena käytettävä hakukenttä.</td>
+						</tr>
+					</tbody>
+				</table>
+			</p>
+			<p>Esimerkkejä:
+				<ul>
+					<li>jakarta</li>
+					<li>te?t -> test, text</li>
+					<li>test* -> tester, testing</li>
+					<li>"jakarta apache"~10 -> jakarta sana toinen apache</li>
+					<li>roam~ -> roam, foam, foams, roams</li>
+					<li>roam~1 -> roam, foam, roams</li>
+					<li>title:"The Right Way" AND text:go</li>
+					<li>jakarta^4 +apache</li>
+				</ul>
+			</p>
+			</section>
+
+			<section>
+				<section>
+					<h2>DisMax Query Parser</h2>
+					<p>Yksinkertaisia hakuja ilman monimutkaista kieltä. Hyväksyy melkein mitä tahansa ilman virheitä.</p>
+					<p>Tukee "sanojen ryhmiä", +pakollisia ja -poistavia sanoja. Ei villikortteja</p>
+					<p>Maximum Disjunction, tekee alikyselyjä ja laskee niiden perusteella pisteet.</p>
+					<p>
+					<p>
+						<table>
+							<thead>
+								<tr>
+									<th>Nimi</th>
+									<th>Kuvaus<t/th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>q</td>
+									<td>Kysely</td>
+								</tr>
+								<tr>
+									<td>q.alt</td>
+									<td>Kysely, jota käytetään mikäli "q" ei ole määritelty. Oletuksena standardiparseri</td>
+								</tr>
+								<tr>
+									<td>qf</td>
+									<td>mihin kenttiin kysely kohdistuu, qf="fieldOne^2.3 fieldTwo fieldThree^0.4"</td>
+								</tr>
+								<tr>
+									<td>mm</td>
+									<td>(Minimum Match) Kuinka moni kyselyssä käytetyistä termeistä tulee löytyä. Useita eri tapoja määrittää.</td>
+								</tr>
+								<tr>
+									<td>pf</td>
+									<td>Phrase Fields, boostaa kenttiä joissa kyselyn fraasit esiintyvät, pf="fieldOne^2.3 fieldThree^0.4" </td>
+								</tr>
+								<tr>
+									<td>ps</td>
+									<td>Kuinka kaukana pf -parametrin kentissä kyselyn fraasin sanat saavat olla, esimerkiksi pf=2</td>
+								</tr>
+								<tr>
+									<td>qs</td>
+									<td>Kuinka kaukana kyselyn fraasin sanat saavat olla toisistaan</td>
+								</tr>
+								<tr>
+									<td>tie</td>
+									<td>Miten eri kenttien pisteet lasketaan yhteen. Arvon ollessa 0.0, vain korkeimman pistemäärän saanut kenttä lasketaan tulokseen, 1.0 kaikki lasketaan yhteen.</td>
+								</tr>
+								<tr>
+									<td>bq</td>
+									<td>Boost Query. Voi määrittää useita, esimerkiksi bq=date:[NOW/DAY-1YEAR TO NOW/DAY]</td>
+								</tr>
+								<tr>
+									<td>bf</td>
+									<td>Boost functions. Esimerkiksi uusimmat ensin "bf=recip(rord(creationDate),1,1000,1000)"</td>
+								</tr>
+							</tbody>
+						</table>
+						</p>
+				  </section>
+					<section>
+						<h2>recip(rord(creationDate),1,1000,1000)</h2>
+						<p>recip(x,m,a,b) implementing a/(m*x+b) where m,a,b are constants, and x is any arbitrarily complex function.</p>
+						<p>When a and b are equal, and x>=0, this function has a maximum value of 1 that drops as x increases. Increasing the value of a and b together results in a movement of the entire function to a flatter part of the curve.</p>
+						<p><img src="solr_images/recip.png" />
+					</section>
+			</section>
+			<section>
+				<h2>Extended DisMax Query Parser</h2>
+				<p>Parannettu versio DisMax:sta</p>
+				<p>Voi käyttää lucene -kieltä, osaa käsitellä syntaksivirheet älykkäästi.</p>
+				<p>Parametreja
+					<table>
+						<thead>
+							<tr>
+								<th>Nimi</th>
+								<th>Kuvaus<t/th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>boost</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>lowercaseOperators</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>pf2</td>
+								<td>Kuten pf, mutta yksittäisten sanojen sijaan muodostuu sanapareja, "yksi kaksi", "kaksi kolme" (bigram)</td>
+							</tr>
+							<tr>
+								<td>pf3</td>
+								<td>Kuten pf, mutta yksittäisten sanojen sijaan muodostuu kolmen sanan ryhmiä, "yksi kaksi kolme" (trigram)</td>
+							</tr>
+							<tr>
+								<td>ps2, ps3</td>
+								<td>Phrase slop pf2:lle, jos ei ole määritelty, ps käytössä</td>
+							</tr>
+							<tr>
+								<td>stopwords</td>
+								<td>ohitetaanko analysaattorissa määritelty stopwordfactory, true/false </td>
+							</tr>
+							<tr>
+								<td>uf</td>
+								<td>Mitä kenttiä loppukäyttäjä voi käyttää kyselyissä</td>
+							</tr>
+						</tbody>
+					</table>
+				</p>
+			</section>
+
+			<section>
+				<h2>Paikalliset parametrit</h2>
+				<p>Kyselyille (q, fq, bq) voi määrittää paikallisia parametrejä
+					<ul>
+						<li>q={!q.op=AND df=title}solr rocks</li>
+						<li>fq={!type=dismax qf=myfield}solr rocks</li>
+					</ul>
+				</p>
+				<p>parametriä "v" voi käyttää arvon välitykseen</li>
+				<p>Voi käyttää viittauksia
+					<ul>
+						<li>q={!type=dismax qf=myfield v=$qq}&amp;qq=solr rocks</li>
+					</ul>
+				</p>
+				<p>Äärimmäisen voimakas</p>
+			</section>
+
+			<section>
+				<h2>Response Writer</h2>
+				<p>Response Writer kirjoittaa tuloksen</p>
+				<p>määritellään parameterillä "wt"</p>
+				<p>Useita erilaisia: xml, json, php, ruby, php, csv</p>
+				<p>velocity on erikoistapaus, käyttää velocity templateja tuloksen esittämiseen</p>
+
+			</section>
+
+			<section>
+				<h2>RequestHandler</h2>
+				<p>RequestHandler käsittelee Solr:n saapuvia pyyntöjä</p>
+				<p>Useita eri tyyppejä
+					<ul>
+						<li>SearchHandler</li>
+						<li>UpdateRequestHandler</li>
+						<li>ShardHandler</li>
+						<li>RealTime Get</li>
+						<li>Index Replication</li>
+						<li>ping</li>
+					</ul>
+				</p>
+			</section>
+			<section>
+				<h2>SearchHandler</h2>
+				<pre><code>
+<requestHandler name="/select" class="solr.SearchHandler">
+  <lst name="defaults">
+    <str name="echoParams">explicit</str>
+    <int name="rows">10</int>
+  </lst>
+  <lst name="appends">
+    <str name="fq">inStock:true</str>
+  </lst>
+	<lst name="invariants">
+    <str name="fl">name description</str>
+  </lst>
+	<p>Voi käyttää viittauksia muihin parametreihin</p>
+</requestHandler>
+				</code></pre>
+			</section>
+			<section>
+				<h2>InitParams</h2>
+				<p>RequestHandlerin parametrejä voi määritellä myös initParams -määritteellä</p>
+				<pre><code>
+<initParams path="/update/**,/query/*,/select,/tvrh,/elevate,/spell,/browse">
+  <lst name="defaults">
+    <str name="df">_text_</str>
+  </lst>
+</initParams>
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>SearchComponent</h2>
+				<p>SearchComponent on hakuun liittyvä ominaisuus, kuten facet, merkkaus</p>
+			</section>
+			<section>
+				<h2>solrconfig.xml</h2>
+
+			</section>
 			</div>
 
 		</div>
@@ -201,14 +737,6 @@
 			});
 
 		</script>
-
-    <div id="sysart" style="background-image: url('theme_images/sysart.png');
-                          background-repeat: no-repeat;
-                          position: absolute;
-                          bottom: 20px;
-                          right: 120px;
-                          height: 60px;
-                          width: 255px;"></div>
 
 	</body>
 </html>
