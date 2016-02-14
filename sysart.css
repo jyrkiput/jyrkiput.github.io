@@ -8,17 +8,24 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   color: #fff; }
 
 html.title body {
-  background:url("theme_images/front.png");
+  background:url("theme_images/front.svg"), url('theme_images/sysart.svg');
   background-repeat: no-repeat;
+  background-position: top left, bottom right;
+  background-size: 100% auto, 20% 20%;
 }
 
+.reveal .controls {
+  right: initial;
+}
 /*********************************************
  *  * GLOBAL STYLES
  *   *********************************************/
 body {
-  background-image: url('theme_images/corner.png');
+  background-image: url('theme_images/corner.svg'), url('theme_images/sysart.svg');
   background-repeat: no-repeat;
-  background-color: #fff; }
+  background-position: top left, bottom right;
+  background-size: auto 30%, 20% 20%;
+  }
 
 .reveal {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
