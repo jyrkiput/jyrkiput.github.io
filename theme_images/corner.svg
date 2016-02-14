@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 744.09448819 1052.3622047"
+   width="73.481598pt"
+   height="171.1246pt"
+   viewBox="0 0 91.851999 213.90575"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -25,17 +25,23 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="195.06811"
-     inkscape:cy="592.27489"
+     inkscape:zoom="2.5899255"
+     inkscape:cx="62.155444"
+     inkscape:cy="167.66347"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1604"
-     inkscape:window-height="955"
-     inkscape:window-x="2020"
-     inkscape:window-y="85"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1280"
+     inkscape:window-height="756"
+     inkscape:window-x="33"
+     inkscape:window-y="35"
+     inkscape:window-maximized="0"
+     units="pt"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:showpageshadow="false" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -44,16 +50,19 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-2.0101531e-5,-0.056445)">
     <a
        id="a4176"
-       style="stroke:#ea5b0a;stroke-opacity:1;fill:#ea5b0a;fill-opacity:1">
+       style="fill:#ea5b0a;fill-opacity:1;stroke:#ea5b0a;stroke-opacity:1"
+       transform="matrix(1.0043712,0,0,1,-163.32007,-332.37697)">
       <path
          sodipodi:nodetypes="cccccsc"
          inkscape:connector-curvature="0"
