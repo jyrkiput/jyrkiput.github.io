@@ -56,6 +56,7 @@
 					<h2>Ominaisuuksia</h2
 					<ul>
 						<li>Kehittyneet tekstihaut</li>
+						<li>Ehdottava haku</li>
 						<li>Monikielisyys</li>
 						<li>Mahdollisuus tallentaa lisätietoja</li>
 						<li>Lähes reaaliaikainen päivitys</li>
@@ -312,7 +313,7 @@
 				<section>
 					<h2>Schema</h2>
 					<h3>Analysoinnin määritys</h2>
-					<p>analysointi tutkii syötteitä sekä indeksoinnin että haun aikana</p>
+					<p>Analysointi tutkii syötteitä sekä indeksoinnin että haun aikana</p>
 					<p>Teksti tutkitaan, pilkotaan osiin ja osia tarvittaessa muokataan, poistetaan ja lisätään</p>
 					<p>Analysointi voi tapahtua yhdellä luokalla, tai Tokenizerin ja Filtereiden linjastona</p>
 					<p>Voidaan määrittää erikseen indeksoinnille ja haulle</p>
@@ -651,7 +652,6 @@
 				<p>määritellään parameterillä "wt"</p>
 				<p>Useita erilaisia: xml, json, php, ruby, php, csv</p>
 				<p>velocity on erikoistapaus, käyttää velocity templateja tuloksen esittämiseen</p>
-
 			</section>
 
 			<section>
@@ -676,13 +676,90 @@
     <str name="echoParams">explicit</str>
     <int name="rows">10</int>
   </lst>
+</requestHandler>
+				</code></pre>
+				<p>RequestHandler, joka ottaa kaikki parametrit kyselyn mukana.
+			</section>
+			<section>
+				<h2>SearchHandler</h2>
+				<pre><code>
+<requestHandler name="/stocked" class="solr.SearchHandler">
+  <lst name="defaults">
+    <str name="echoParams">explicit</str>
+    <int name="rows">10</int>
+  </lst>
   <lst name="appends">
     <str name="fq">inStock:true</str>
   </lst>
 	<lst name="invariants">
     <str name="fl">name description</str>
   </lst>
-	<p>Voi käyttää viittauksia muihin parametreihin</p>
+</requestHandler>
+      </code></pre>
+			<p>
+			</section>
+			<section>
+				<h2>SearchComponent</h2>
+				<p>SearchComponent on hakuun liittyvä ominaisuus, kuten faceting, merkkaus.</p>
+				<p>Jokainen ottaa vastaan omia parametrejä, ja lisää vastaukseen oman osuuden.</p>
+				<p>Käyttäminen saattaa vaatia muutoksia indeksointiin.</p>
+				<p>SearchComponentit rekisteröidään RequestHandleriin.</p>
+			</section>
+			<section>
+				<h2>SearchComponent</h2>
+				<p>Oletuksena RequestHandlerilla on seuraavat SearchComponentit</p>
+				<table>
+					<thead>
+						<tr>
+							<th>nimi</th>
+							<th>Luokka</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>query</td>
+							<td>solr.QueryComponent</td>
+						</tr>
+						<tr>
+							<td>facet</td>
+							<td>solr.FacetComponent</td>
+						</tr>
+						<tr>
+							<td>mlt</td>
+							<td>solr.MoreLikeThisComponent</td>
+						</tr>
+						<tr>
+							<td>highlight</td>
+							<td>solr.HighlightComponent</td>
+						</tr>
+						<tr>
+							<td>stats</td>
+							<td>solr.StatsComponent</td>
+						</tr>
+						<tr>
+							<td>debug</td>
+							<td>solr.DebugComponent</td>
+						</tr>
+						<tr>
+							<td>expand</td>
+							<td>solr.ExpandComponent</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>Oletuskomponentit voi ylikirjoittaa omilla</p>
+			</section>
+			<section>
+				<h2>SearchComponent rekisteröinti</h2>
+				<p>SearchComponent rekisteröidään Request Handleriin. Oletuskomponentteja ei enää käytetä</p>
+				<pre><code>
+<requestHandler name="/terms" class="solr.SearchHandler">
+    <lst name="defaults">
+        <bool name="terms">true</bool>
+        <bool name="distrib">false</bool>
+    </lst>
+    <arr name="components">
+        <str>terms</str>
+    </arr>
 </requestHandler>
 				</code></pre>
 			</section>
@@ -690,21 +767,19 @@
 				<h2>InitParams</h2>
 				<p>RequestHandlerin parametrejä voi määritellä myös initParams -määritteellä</p>
 				<pre><code>
-<initParams path="/update/**,/query/*,/select,/tvrh,/elevate,/spell,/browse">
+<initParams name="default_init" path="/update/**,/query/*,/select,/tvrh,/elevate,/spell,/browse">
   <lst name="defaults">
     <str name="df">_text_</str>
   </lst>
 </initParams>
 				</code></pre>
-			</section>
-
-			<section>
-				<h2>SearchComponent</h2>
-				<p>SearchComponent on hakuun liittyvä ominaisuus, kuten facet, merkkaus</p>
+				<p>Ovat käytössä joko path -määrittelyn perusteella tai eksplisiittisesti nimen kautta</p>
 			</section>
 			<section>
-				<h2>solrconfig.xml</h2>
-
+				<h2>Yhteenveto</h2>
+				<p>Äärimmäisen monipuolinen, ja sen vuoksi, monimutkainen järjestelmä</p>
+				<p>"Järkeviä oletusarvoja" ei käytännössä ole</p>
+				<p>Tulosten oikeellisuus ei ole absoluuttinen arvo</p>
 			</section>
 			</div>
 
