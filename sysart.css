@@ -311,14 +311,17 @@ body {
 
   html.title h1 {
     font-size: 68pt;
+    text-align: left;
     color: white;
   }
   html.title h2 {
     font-size: 52pt;
+    text-align: left;
     color: white;
   }
   html.title h3 {
     font-size: 40pt;
+    text-align: left;
     color: white;
   }
   html.title p {
