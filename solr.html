@@ -402,7 +402,10 @@
 								<li>Solr Cell with Tika</li>
 							</ul>
 						</p>
-						<p>Indeksointi kulkee analysaattoreiden läpi</p>
+						<p>Indeksointi kulkee UpdateHandlerin kautta Updateprosessoreiden läpi. </p>
+						<p>UpdateProcessorit voivat lisätä, muokata ja poistaa kenttiä, hylätä päivytyksen.</p>
+						<p>Suuri osa Solr:n ominaisuuksista on toteutettu UpdateProsessorien avulla</p>
+						<p>Eräs prosessoreista huolehtii dokumentin kulkemisesta analysaattoreiden läpi</p>
 				  </div>
 					<div style="display: inline-block;">
 					  <img src="solr_images/analyzer.svg" style="border: 0px;"/>
@@ -774,6 +777,12 @@
 </initParams>
 				</code></pre>
 				<p>Ovat käytössä joko path -määrittelyn perusteella tai eksplisiittisesti nimen kautta</p>
+			</section>
+			<section>
+				<h2>Yhteenveto</h2>
+				<p>
+					<img src="solr_images/summary.svg"
+				</p>
 			</section>
 			<section>
 				<h2>Yhteenveto</h2>
