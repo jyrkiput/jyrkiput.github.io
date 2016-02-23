@@ -51,6 +51,14 @@
 					</p>
 				</section>
 				<section>
+					<h1>Toiminta</h1>
+					<p>Ohjelma tarvitsee kirjautumisen</p>
+					<p>Selain lataa Keycloakin login -sivun ja välittää tietoa HTTP -parametreillä</p>
+					<p>Keycloak suorittaa kirjautumisen</p>
+					<p>Selain ohjataan takaisin ohjelman sivuille, kirjautumistieto välitetään parametreillä</p>
+					<p>Palvelin ohjelma tarkistaa kirjautumistiedon ja kysyy Keycloak -palvelimelta session tiedon</p>
+				</section>
+				<section>
 					<h1>Realm</h1>
 					<p>Realm sisältää tiedot käyttäjistä, rooleista, identiteetin tarjoajista ja asiakasohjelmista</p>
 					<p>Käyttäjät luodaan Realmeihin joko käsin tai automaattisesti</p>
@@ -59,23 +67,71 @@
 					<h1>Client</h1>
 					<p>Client on palvelu, jonka Realm suojaa</p>
 					<p>Kun käyttäjä yrittää käyttää palvelua, selain ohjataan KeyCloakin kirjautumiseen</p>
-					<p>Rooleja voi määritellä myös Client tasolla</p>
-					<p>Useita eri integroitumis ratkaisuja</p>
+					<p>Useita eri integroitumisratkaisuja</p>
 					<p>Muissa yhteyksissä käytetään termiä Service Provider</p>
 				</section>
 				<section>
 					<h1>Identity provider</h1>
 					<p>Identity Provider on ulkoinen järjestelmä, joka tunnistaa käyttäjän</p>
 					<p>Esimerkiksi Vetuma, Facebook, Google, LDAP</p>
+					<p>Voi käyttää useita IP:ja ja yhdistää samaan käyttäjään</p>
 				</section>
 				<section>
 					<h1>Roles</h1>
 					<p>Keycloakin kannalta roolit ovat vain tekstiä</p>
 					<p>Mahdollista määrittää muunnoksia IdentityProviderin ja Keycloakin roolien välillä</p>
 					<p>Rooleja voidaan määrittää useassa eri paikassa (Client, Realm)</p>
+					<p>Keycloak sisältää valmiita rooleja, joilla hallitaan Keycloakin käyttöä</p>
 				</section>
-				<section>
 
+				<section>
+					<h1>Native Client Integration</h1>
+					<img src="keycloak_images/client_integration_native.svg" style="border: 0px; "/>
+				</section>
+
+				<section>
+					<h1>Proxy Client Integration</h1>
+					<img src="keycloak_images/client_integration_proxy.svg" style="border: 0px; "/>
+				</section>
+
+				<section>
+					<h1>SAML 2.0 Client Integration</h1>
+					<img src="keycloak_images/client_integration_saml.svg" style="border: 0px; "/>
+				</section>
+
+				<section>
+					<h1>LDAP Identity Provider</h1>
+					<img src="keycloak_images/ldap_identity_provider.svg" style="border: 0px; "/>
+				</section>
+
+				<section>
+					<h1>OpenID Identity Provider</h1>
+					<img src="keycloak_images/openid_identity_provider.svg" style="border: 0px; "/>
+				</section>
+
+				<section>
+					<h1>Tunnus/Salasana</h1>
+					<p>Sisäänrakennettu tunnus/salasana -tunnistautuminen</p>
+					<p>Paljon ominaisuuksia
+						<ul>
+							<li>Salasanan vaihto/unohdus</li>
+							<li>Salasanan monimutkaisuusvaatimukset</li>
+							<li>Salasanan vaihto ensimmäisellä kirjautumisella</li>
+							<li>Time Based One Time -login</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h1>Käyttäminen REST -apien kanssa</h1>
+					<p>OAUTH 2.0 Bearer token tuki</p>
+					<p>Valmis selainohjelma joka tukee tokenin välitystä API -rajapinnalle</p>
+				</section>
+
+				<section>
+					<h1>Muuta</h1>
+					<p>Teemat</p>
+					<p>API:t Keycloakin hallitsemiseen</p>
 				</section>
 			</div>
 
