@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Empty</title>
+		<title>Jenkins 2.0</title>
 
-		<meta name="description" content="Empty">
+		<meta name="description" content="Jenkins 2.0">
 		<meta name="author" content="Someone">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,13 +41,214 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section data-state="title">
-					<h1>Empty</h1>
+					<h1>Jenkins 2.0</h1>
+					<h3>Mitä, milloin</h3>
+					<h4>jyrki.puttonen@sysart.fi / <a href="https://twitter.com/jyrkiput">@jyrkiput</a></h4>
 				</section>
 				<section>
-					<h1>Empty</h1>
+					<h1>Yleistä</h1>
 				</section>
-			</div>
+				<section>
+					<h1>Uudet ominaisuudet</h1>
+					<ul>
+						<li>Helpompi käyttöönotto</li>
+						<li>Uusi käyttöliittymä</li>
+						<li>Täysin taaksepäin yhteensopiva</li>
+						<li>Pipeline as Code</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Helpompi käyttöönotto</h1>
+					<p>Valikoima plugineja valmiina</p>
+					<p>docker run -p 8060:8080 --name jenkins jenkinsci/jenkins:2.0-alpha-2<p>
+					<p><a href="http://localhost:8060/">http://localhost:8060/</a></p>
+				</section>
+				<section>
+					<h1>Paranneltu käyttöliittymä</h1>
+					<p>Pieniä, käyttöä helpottavia parannuksia</p>
+					<p>Konfigurointi sivu muuttunut</p>
+				</section>
+				<section>
+					<h1>Täysin taaksepäin yhteensopiva</h1>
+					<p>Ei mitään mullistavia muutoksia<p>
+				</section>
+				<section>
+					<h1>Pipeline as Code</h1>
+					<p>Plugin, joka on ollut olemassa jo pitkään nimellä Workflow</p>
+					<p>Tukee pitkiä, useampi vaiheisia prosesseja</p>
+					<p>Jenkinsfile</p>
+				</section>
+				<section>
+					<h1>Julkaisu</h1>
+					<p>Lisätietoja <a href="https://jenkins-ci.org/2.0/">https://jenkins-ci.org/2.0/</a>
+					<p>Alpha buildit saatavilla</p>
+					<p>Release muutaman kuukauden sisään</p>
+				</section>
+				<section data-state="title">
+					<h1>Skriptattava Jenkins</h1>
+					<h3>Pipeline as Code</h3>
+				</section>
+				<section>
+					<h1>Pipeline as Code</h1>
+					<p>Voi kirjoittaa joko suoraan Jenkinssiin, tai SCM:n Jenkinsfile:n</p>
+					<p><pre><code>
+node('master') {
+  echo "hello"
+}
+				  </code></pre>
+					</p>
+				</section>
+				<section>
+					<h1>Pipeline as Code, SCM checkout</h1>
+					<p></p>
+					<p><pre><code>
+node('master') {
+	git url: 'https://github.com/jyrkiput/jenkins-demo'
+}
+					</code></pre>
+					</p>
+				</section>
+				<section>
+					<h1>Pipeline as Code, SCM checkout, Gradle build&amp;test</h1>
+					<p></p>
+					<p><pre><code>
+node('master') {
+	git url: 'https://github.com/jyrkiput/jenkins-demo'
+	sh "./gradlew test"
+}
+					</code></pre>
+					</p>
+				</section>
+				<section>
+					<h1>Pipeline as Code, Stages</h1>
+					<p></p>
+					<p><pre><code>
+stage 'Build'
+node('master') {
+	git url: 'https://github.com/jyrkiput/jenkins-demo'
+	sh "./gradlew build"
+}
+stage 'Test'
+node('master') {
+	git url: 'https://github.com/jyrkiput/jenkins-demo'
+	sh "./gradlew test"
+}
+					</code></pre>
+					</p>
+				</section>
+				<section>
+					<h1>Pipeline as Code, Remotes</h1>
+					<p>Remote lisättävä käsin<p>
+					<p>docker run --rm -ti --link jenkins:master java:8-jdk /bin/bash -c "curl http://master:8080/jnlpJars/slave.jar -s -o /slave.jar &amp;&amp; java -jar /slave.jar -jnlpUrl http://master:8080/computer/remote/slave-agent.jnlp"
+					<p><pre><code>
+stage 'Build'
+node('master') {
+	git url: 'https://github.com/jyrkiput/jenkins-demo'
+	sh "./gradlew build"
+}
+stage 'Test'
+node {
+	git url: 'https://github.com/jyrkiput/jenkins-demo'
+	sh "./gradlew test"
+}
+stage 'Package'
+node('remote') {
+	git url: 'https://github.com/jyrkiput/jenkins-demo'
+	sh "./gradlew jar"
+}
+					</code></pre>
+					</p>
+				</section>
+				<section>
+					<h1>Pipeline as Code, Jenkinsfile</h1>
+					<p>Konfiguroitava valmiiksi, scm, polling, etc</p>
+					<p>Annetaan polku Jenkinsfileen, jossa on Pipeline määritelty</p>
+					<p><a href="https://github.com/jyrkiput/jenkins-demo/blob/master/Jenkinsfile">https://github.com/jyrkiput/jenkins-demo/blob/master/Jenkinsfile</a></p>
+				</section>
+				<section>
+					<h1>Pipeline as Code, syntaksi</h1>
+					<p>Groovy DSL</p>
+					<p>Voi looppailla, tehdä if -lauseita, vaikka mitä</p>
+				</section>
+				<section>
+					<h1>Pipeline as Code, Jaetut kirjastot</h1>
+					<p>Voi tehdä kirjastoja joita voi uudelleenkäyttää</p>
+					<p>Tallennetaan Jenkinsin hallinnoimaan git -repoon, http://localhost:8060/workflowLibs.git</p>
+					<p>Kirjasto
+					<pre><code>
+// src/org/foo/Zot.groovy
+package org.foo;
 
+def checkOutFrom(repo) {
+  git url: "git@github.com:jenkinsci/${repo}"
+}
+					</pre></code></p>
+					<p>Pipeline koodi
+						<pre><code>
+def z = new org.foo.Zot()
+z.checkOutFrom(repo)
+					</pre></code></p>
+				</section>
+
+			<section data-state="title">
+				<h1>Skriptattava Jenkins</h1>
+				<h3>Job DSL</h3>
+			</section>
+			<section>
+				<h1>Erot Pipelineen</h1>
+				<p>Tarvitsee oman "Seed" -jobin</p>
+				<p>Luo uusia jobeja</p>
+				<p>Paljon laajempi DSL</p>
+			</section>
+			<section>
+				<h1>Demo</h1>
+				<p>Pluginit asennettava JobDSL, Gradle, Parameterized Trigger plugin</p>
+				<pre><code>
+def projectName = "job-dsl"
+folder(projectName)
+
+freeStyleJob("${projectName}/Build") {
+  label("master")
+  scm {
+        git {
+            remote {
+                url("https://github.com/jyrkiput/jenkins-demo")
+            }
+        }
+    }
+    steps {
+        gradle {
+            tasks("build")
+        }
+        downstreamParameterized {
+            trigger("$projectName/Test") {
+                parameters {
+                    currentBuild()
+                }
+            }
+        }
+    }
+}
+
+freeStyleJob("${projectName}/Test") {
+  label("master")
+  scm {
+        git {
+            remote {
+                url("https://github.com/jyrkiput/jenkins-demo")
+            }
+        }
+    }
+
+    steps {
+        gradle {
+            tasks("test")
+        }
+    }
+}
+				</code></pre>
+			</section>
+		</div>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
