@@ -138,7 +138,7 @@ node('master') {
 				</section>
 				<section>
 					<h1>Pipeline as Code, Remotes</h1>
-					<p>Remote lisättävä käsin<p>
+					<p>Remote lisättävä käsin, "tyypiksi Dump Slave" ja "Web start", "Remote root directory: /data"<p>
 					<p>docker run --rm -ti --link jenkins:master java:8-jdk /bin/bash -c "curl http://master:8080/jnlpJars/slave.jar -s -o /slave.jar &amp;&amp; java -jar /slave.jar -jnlpUrl http://master:8080/computer/remote/slave-agent.jnlp"
 					<p><pre><code>
 stage 'Build'
