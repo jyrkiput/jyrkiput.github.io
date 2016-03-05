@@ -60,6 +60,8 @@
 				<section>
 					<h1>Helpompi käyttöönotto</h1>
 					<p>Valikoima plugineja valmiina</p>
+					<p>Ensimmäisen jobin luominen helpompaa</p>
+					<p>Helppo testata Dockerin avulla</p>
 					<p>docker run -p 8060:8080 --name jenkins jenkinsci/jenkins:2.0-alpha-2<p>
 					<p><a href="http://localhost:8060/">http://localhost:8060/</a></p>
 				</section>
@@ -75,8 +77,8 @@
 				<section>
 					<h1>Pipeline as Code</h1>
 					<p>Plugin, joka on ollut olemassa jo pitkään nimellä Workflow</p>
-					<p>Tukee pitkiä, useampi vaiheisia prosesseja</p>
-					<p>Jenkinsfile</p>
+					<p>Tukee pitkiä, monivaiheisia prosesseja, jotka säilyvät käynnistyksien yli</p>
+					<p>Voidaan määrittää Jenkinsfilessä tai UI:ssa</p>
 				</section>
 				<section>
 					<h1>Julkaisu</h1>
@@ -91,12 +93,14 @@
 				<section>
 					<h1>Pipeline as Code</h1>
 					<p>Voi kirjoittaa joko suoraan Jenkinssiin, tai SCM:n Jenkinsfile:n</p>
+					<p><a href="http://localhost:8060/newJob">http://localhost:8060/newJob</a>, Pipeline tyypiksi, Pipeline tab</p>
 					<p><pre><code>
 node('master') {
   echo "hello"
 }
 				  </code></pre>
 					</p>
+					<p>Tallenna ja buildaa</p>
 				</section>
 				<section>
 					<h1>Pipeline as Code, SCM checkout</h1>
@@ -138,8 +142,20 @@ node('master') {
 				</section>
 				<section>
 					<h1>Pipeline as Code, Remotes</h1>
-					<p>Remote lisättävä käsin, "tyypiksi Dump Slave" ja "Web start", "Remote root directory: /data"<p>
+					<p>Remote lisättävä käsin <a href="http://192.168.179.53:8060/computer/new">http://192.168.179.53:8060/computer/new</a>
+						<ul>
+							<li>Permanent agent</li>
+							<li>Name: remote</li>
+							<li>Remote root directory: /data/jenkins</li>
+							<li>Launch Method: Launch agents via Java Web Start</li>
+						</ul>
+					</p>
 					<p>docker run --rm -ti --link jenkins:master java:8-jdk /bin/bash -c "curl http://master:8080/jnlpJars/slave.jar -s -o /slave.jar &amp;&amp; java -jar /slave.jar -jnlpUrl http://master:8080/computer/remote/slave-agent.jnlp"
+					<p>One liners ftw!</p>
+				</section>
+				<section>
+					<h1>Pipeline as Code, Remotes</h1>
+
 					<p><pre><code>
 stage 'Build'
 node('master') {
@@ -163,17 +179,19 @@ node('remote') {
 					<h1>Pipeline as Code, Jenkinsfile</h1>
 					<p>Konfiguroitava valmiiksi, scm, polling, etc</p>
 					<p>Annetaan polku Jenkinsfileen, jossa on Pipeline määritelty</p>
+					<p>Pipeline from SCM</p>
 					<p><a href="https://github.com/jyrkiput/jenkins-demo/blob/master/Jenkinsfile">https://github.com/jyrkiput/jenkins-demo/blob/master/Jenkinsfile</a></p>
 				</section>
 				<section>
 					<h1>Pipeline as Code, syntaksi</h1>
 					<p>Groovy DSL</p>
 					<p>Voi looppailla, tehdä if -lauseita, vaikka mitä</p>
+					<p>Esimerkkejä <a href="https://github.com/jenkinsci/pipeline-examples">https://github.com/jenkinsci/pipeline-examples</a></p>
 				</section>
 				<section>
 					<h1>Pipeline as Code, Jaetut kirjastot</h1>
 					<p>Voi tehdä kirjastoja joita voi uudelleenkäyttää</p>
-					<p>Tallennetaan Jenkinsin hallinnoimaan git -repoon, http://localhost:8060/workflowLibs.git</p>
+					<p>Tallennetaan Jenkinsin hallinnoimaan git -repoon, <a href="http://localhost:8060/workflowLibs.git">http://localhost:8060/workflowLibs.git</a></p>
 					<p>Kirjasto
 					<pre><code>
 // src/org/foo/Zot.groovy
@@ -203,6 +221,8 @@ z.checkOutFrom(repo)
 			<section>
 				<h1>Demo</h1>
 				<p>Pluginit asennettava JobDSL, Gradle, Parameterized Trigger plugin</p>
+				<p>Luo uusi Freestyle -job</p>
+				<p>Build -> Process Job DSLs -> Use the provided DSL script</p>
 				<pre><code>
 def projectName = "job-dsl"
 folder(projectName)

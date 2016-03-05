@@ -42,61 +42,66 @@
 			<div class="slides">
 				<section data-state="title">
 					<h1>Jenkins 2.0</h1>
-					<h3>Mitä, milloin</h3>
+					<h3>What, when</h3>
 					<h4>jyrki.puttonen@sysart.fi / <a href="https://twitter.com/jyrkiput">@jyrkiput</a></h4>
 				</section>
 				<section>
-					<h1>Yleistä</h1>
+					<h1>General organizational things</h1>
 				</section>
 				<section>
-					<h1>Uudet ominaisuudet</h1>
+					<h1>New features</h1>
 					<ul>
-						<li>Helpompi käyttöönotto</li>
-						<li>Uusi käyttöliittymä</li>
-						<li>Täysin taaksepäin yhteensopiva</li>
+						<li>Out of the box -experience</li>
+						<li>Improved User Interface</li>
+						<li>Totally backwards compatible</li>
 						<li>Pipeline as Code</li>
 					</ul>
 				</section>
 				<section>
-					<h1>Helpompi käyttöönotto</h1>
-					<p>Valikoima plugineja valmiina</p>
+					<h1>Out of the box -experience</h1>
+					<p>Recommended plugins are suggested</p>
+					<p>First job creation is shown</p>
+					<p>Easy to try out with docker</p>
 					<p>docker run -p 8060:8080 --name jenkins jenkinsci/jenkins:2.0-alpha-2<p>
 					<p><a href="http://localhost:8060/">http://localhost:8060/</a></p>
 				</section>
 				<section>
-					<h1>Paranneltu käyttöliittymä</h1>
-					<p>Pieniä, käyttöä helpottavia parannuksia</p>
-					<p>Konfigurointi sivu muuttunut</p>
+					<h1>Improved User Interface</h1>
+					<p>Small, useful improvements</p>
+					<p>Configuration page has been revamped</p>
 				</section>
 				<section>
-					<h1>Täysin taaksepäin yhteensopiva</h1>
-					<p>Ei mitään mullistavia muutoksia<p>
+					<h1>Totally backwards compatible</h1>
+					<p>No reason not to upgrade<p>
 				</section>
 				<section>
 					<h1>Pipeline as Code</h1>
-					<p>Plugin, joka on ollut olemassa jo pitkään nimellä Workflow</p>
-					<p>Tukee pitkiä, useampi vaiheisia prosesseja</p>
-					<p>Jenkinsfile</p>
+					<p>Plugin formerly known as Workflow</p>
+					<p>Supports simple and complex pipelines through the expressive Groovy-based DSL</p>
+					<p>Ability to suspend/resume of executing jobs</p>
+					<p>Can be defined in Jenkinsfile or in UI</p>
 				</section>
 				<section>
-					<h1>Julkaisu</h1>
-					<p>Lisätietoja <a href="https://jenkins-ci.org/2.0/">https://jenkins-ci.org/2.0/</a>
-					<p>Alpha buildit saatavilla</p>
-					<p>Release muutaman kuukauden sisään</p>
+					<h1>Release</h1>
+					<p>More information at <a href="https://jenkins-ci.org/2.0/">https://jenkins-ci.org/2.0/</a>
+					<p>Alpha builds are available</p>
+					<p>Release in few months</p>
 				</section>
 				<section data-state="title">
-					<h1>Skriptattava Jenkins</h1>
+					<h1>Scripting Jenkins</h1>
 					<h3>Pipeline as Code</h3>
 				</section>
 				<section>
 					<h1>Pipeline as Code</h1>
-					<p>Voi kirjoittaa joko suoraan Jenkinssiin, tai SCM:n Jenkinsfile:n</p>
+					<p>Can be defined in UI or in Jenkinsfile which is checked into SCM</p>
+					<p><a href="http://localhost:8060/newJob">http://localhost:8060/newJob</a>, Pipeline as type, then pipeline tab</p>
 					<p><pre><code>
 node('master') {
   echo "hello"
 }
 				  </code></pre>
 					</p>
+					<p>Save and build now</p>
 				</section>
 				<section>
 					<h1>Pipeline as Code, SCM checkout</h1>
@@ -138,8 +143,20 @@ node('master') {
 				</section>
 				<section>
 					<h1>Pipeline as Code, Remotes</h1>
-					<p>Remote lisättävä käsin, "tyypiksi Dump Slave" ja "Web start", "Remote root directory: /data"<p>
+					<p>Add remote <a href="http://192.168.179.53:8060/computer/new">http://192.168.179.53:8060/computer/new</a>
+						<ul>
+							<li>Permanent agent</li>
+							<li>Name: remote</li>
+							<li>Remote root directory: /data/jenkins</li>
+							<li>Launch Method: Launch agents via Java Web Start</li>
+						</ul>
+					</p>
 					<p>docker run --rm -ti --link jenkins:master java:8-jdk /bin/bash -c "curl http://master:8080/jnlpJars/slave.jar -s -o /slave.jar &amp;&amp; java -jar /slave.jar -jnlpUrl http://master:8080/computer/remote/slave-agent.jnlp"
+					<p>One liners ftw!</p>
+				</section>
+				<section>
+					<h1>Pipeline as Code, Remotes</h1>
+
 					<p><pre><code>
 stage 'Build'
 node('master') {
@@ -161,20 +178,22 @@ node('remote') {
 				</section>
 				<section>
 					<h1>Pipeline as Code, Jenkinsfile</h1>
-					<p>Konfiguroitava valmiiksi, scm, polling, etc</p>
-					<p>Annetaan polku Jenkinsfileen, jossa on Pipeline määritelty</p>
+					<p>SCM, trigger etc must be configured by hand</p>
+					<p>Path for Jenkinsfile in SCM</p>
+					<p>Pipeline from SCM</p>
 					<p><a href="https://github.com/jyrkiput/jenkins-demo/blob/master/Jenkinsfile">https://github.com/jyrkiput/jenkins-demo/blob/master/Jenkinsfile</a></p>
 				</section>
 				<section>
-					<h1>Pipeline as Code, syntaksi</h1>
+					<h1>Pipeline as Code, syntax</h1>
 					<p>Groovy DSL</p>
-					<p>Voi looppailla, tehdä if -lauseita, vaikka mitä</p>
+					<p>Loops, branching etc</p>
+					<p>Examples <a href="https://github.com/jenkinsci/pipeline-examples">https://github.com/jenkinsci/pipeline-examples</a></p>
 				</section>
 				<section>
-					<h1>Pipeline as Code, Jaetut kirjastot</h1>
-					<p>Voi tehdä kirjastoja joita voi uudelleenkäyttää</p>
-					<p>Tallennetaan Jenkinsin hallinnoimaan git -repoon, http://localhost:8060/workflowLibs.git</p>
-					<p>Kirjasto
+					<h1>Pipeline as Code, Shared libraries</h1>
+					<p>Reusable libraries for pipelines</p>
+					<p>Stored in Git repository that is managed by Jenkins, <a href="http://localhost:8060/workflowLibs.git">http://localhost:8060/workflowLibs.git</a></p>
+					<p>Library code
 					<pre><code>
 // src/org/foo/Zot.groovy
 package org.foo;
@@ -183,7 +202,7 @@ def checkOutFrom(repo) {
   git url: "git@github.com:jenkinsci/${repo}"
 }
 					</pre></code></p>
-					<p>Pipeline koodi
+					<p>Pipeline code
 						<pre><code>
 def z = new org.foo.Zot()
 z.checkOutFrom(repo)
@@ -195,14 +214,16 @@ z.checkOutFrom(repo)
 				<h3>Job DSL</h3>
 			</section>
 			<section>
-				<h1>Erot Pipelineen</h1>
-				<p>Tarvitsee oman "Seed" -jobin</p>
-				<p>Luo uusia jobeja</p>
-				<p>Paljon laajempi DSL</p>
+				<h1>Differences to Pipeline</h1>
+				<p>Requires a  "Seed" -job</p>
+				<p>Creates new jobs</p>
+				<p>More comprehensive DSL</p>
 			</section>
 			<section>
 				<h1>Demo</h1>
-				<p>Pluginit asennettava JobDSL, Gradle, Parameterized Trigger plugin</p>
+				<p>Install following plugins: Job DSL, Gradle, Parameterized Trigger</p>
+				<p>Create Freestyle job</p>
+				<p>Build -> Process Job DSLs -> Use the provided DSL script</p>
 				<pre><code>
 def projectName = "job-dsl"
 folder(projectName)
@@ -249,8 +270,8 @@ freeStyleJob("${projectName}/Test") {
 				</code></pre>
 			</section>
 			<section>
-				<h1>Kiitoksia mielenkiinnosta</h1>
-				<p>Kysymyksiä, kommentteja?</p>
+				<h1>Thank you</h1>
+				<p>Questions, comments?</p>
 			</section>
 		</div>
 		</div>
