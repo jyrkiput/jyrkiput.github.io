@@ -45,18 +45,19 @@
 				</section>
 				<section>
 					<h1>Keycloak</h1>
-					<p>Integroitu kertakirjautumisen ja identiteetin hallinta selaimessa toimiville ohjelmille ja RESTful -palveluille</p>
+					<p>Integroitu kertakirjautumisen ja identiteetin hallinta</p>
+					<p>Selainohjelmat, HTTP</p>
 					<p>
 						<img src="keycloak_images/overview.svg" />
 					</p>
 				</section>
 				<section>
 					<h1>Toiminta</h1>
-					<p>Ohjelma tarvitsee kirjautumisen</p>
-					<p>Selain lataa Keycloakin login -sivun ja välittää tietoa HTTP -parametreillä</p>
-					<p>Keycloak suorittaa kirjautumisen</p>
-					<p>Selain ohjataan takaisin ohjelman sivuille, kirjautumistieto välitetään parametreillä</p>
-					<p>Palvelin ohjelma tarkistaa kirjautumistiedon ja kysyy Keycloak -palvelimelta session tiedon</p>
+					<p class="fragment">Ohjelma tarvitsee kirjautumisen</p>
+					<p class="fragment">Selain lataa Keycloakin login -sivun ja välittää tietoa HTTP -parametreillä</p>
+					<p class="fragment">Keycloak suorittaa kirjautumisen</p>
+					<p class="fragment">Selain ohjataan takaisin ohjelman sivuille, kirjautumistieto välitetään parametreillä</p>
+					<p class="fragment">Palvelin ohjelma tarkistaa kirjautumistiedon ja kysyy Keycloak -palvelimelta session tiedon</p>
 				</section>
 				<section>
 					<h1>Realm</h1>
@@ -74,15 +75,71 @@
 					<h1>Identity provider</h1>
 					<p>Identity Provider on ulkoinen järjestelmä, joka tunnistaa käyttäjän</p>
 					<p>Esimerkiksi Vetuma, Facebook, Google, LDAP</p>
-					<p>Voi käyttää useita IP:ja ja yhdistää samaan käyttäjään</p>
+					<p>Voi käyttää useita IdP:tä ja yhdistää samaan käyttäjään</p>
 				</section>
 				<section>
 					<h1>Roles</h1>
-					<p>Keycloakin kannalta roolit ovat vain tekstiä</p>
 					<p>Mahdollista määrittää muunnoksia IdentityProviderin ja Keycloakin roolien välillä</p>
 					<p>Rooleja voidaan määrittää useassa eri paikassa (Client, Realm)</p>
 					<p>Keycloak sisältää valmiita rooleja, joilla hallitaan Keycloakin käyttöä</p>
+					<p>Composite role on ryhmä rooleja</p>
+					<p>Permission scope määrittää mitä rooleja client voi käyttää</p>
 				</section>
+				<section>
+					<h1>Groups</h1>
+					<p>Käyttäjälle voidaan määrittää ryhmä</p>
+					<p>Ryhmällä on rooleja</p>
+				</section>
+				<section>
+					<h1>Flows</h1>
+					<p>Määrittelevät mitä tapahtuu kirjautuessa, rekisteröityessä yms</p>
+					<p>Sähköpostin varmennus, profiilitietojen tarkastus</p>
+				</section>
+				<section>
+					<h1>Ulkoinen IdP</h1>
+					<p></p>
+				</section>
+				<section>
+					<h1>Valmiit client adapterit</h1>
+					<p>Palvelimelle asennetaan adapteri</p>
+					<p>Valmiita adaptereja:
+						<ul>
+						<li>JBoss AS7</li>
+						<li>EAP 6.x</li>
+						<li>Wildfly</li>
+						<li>Tomcat</li>
+						<li>Jetty</li>
+						<li>Javascript</li>
+						<li>node.js</li>
+						<li>http proxy</li>
+						<li>J2EE Filter</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h1>Muuta</h1>
+					<p>Teemat</p>
+					<p>API:t Keycloakin hallitsemiseen</p>
+					<p>Keycloak käyttää itseään hallintaliittymän autentikointiin</p>
+					<p>Direct access grant, Service account</p>
+					<p>Skaalautuva</p>
+
+				</section>
+
+				<section>
+					<h1>Tunnus/Salasana</h1>
+					<p>Sisäänrakennettu tunnus/salasana -tunnistautuminen</p>
+					<p>Paljon ominaisuuksia
+						<ul>
+							<li>Salasanan vaihto/unohdus</li>
+							<li>Salasanan monimutkaisuusvaatimukset</li>
+							<li>Salasanan vaihto ensimmäisellä kirjautumisella</li>
+							<li>Time Based One Time -login</li>
+						</ul>
+					</p>
+				</section>
+
 
 				<section>
 					<h1>Native Client Integration</h1>
@@ -109,30 +166,6 @@
 					<img src="keycloak_images/openid_identity_provider.svg" style="border: 0px; "/>
 				</section>
 
-				<section>
-					<h1>Tunnus/Salasana</h1>
-					<p>Sisäänrakennettu tunnus/salasana -tunnistautuminen</p>
-					<p>Paljon ominaisuuksia
-						<ul>
-							<li>Salasanan vaihto/unohdus</li>
-							<li>Salasanan monimutkaisuusvaatimukset</li>
-							<li>Salasanan vaihto ensimmäisellä kirjautumisella</li>
-							<li>Time Based One Time -login</li>
-						</ul>
-					</p>
-				</section>
-
-				<section>
-					<h1>Käyttäminen REST -apien kanssa</h1>
-					<p>OAUTH 2.0 Bearer token tuki</p>
-					<p>Valmis selainohjelma joka tukee tokenin välitystä API -rajapinnalle</p>
-				</section>
-
-				<section>
-					<h1>Muuta</h1>
-					<p>Teemat</p>
-					<p>API:t Keycloakin hallitsemiseen</p>
-				</section>
 			</div>
 
 		</div>
