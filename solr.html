@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="sysart.css" id="theme">
+		<link rel="stylesheet" href="css/theme/symbio.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -42,10 +42,11 @@
 			<div class="slides">
 				<section data-state="title">
 					<h1>Solr</h1>
-					<h3>Hakumoottori</h3>
+					<h2>Hakumoottori</h2>
+					<h3>jyrki.puttonen@symbio.com / <a href="https://twitter.com/jyrkiput">@jyrkiput</a></h3>
 				</section>
 				<section>
-					<h2>Yleistä</h2
+					<h1>Yleistä</h1>
 					<p>Solr on konfiguroitava, skaalautuva hakumoottori.</p>
 					<p>Toteutettu Javalla.</p>
 					<p>Dokumenttitietokanta</p>
@@ -53,7 +54,7 @@
 					<p>Käyttäjiä mm. Netflix, Disney, eBay, BestBuy</p>
 				</section>
 				<section>
-					<h2>Ominaisuuksia</h2
+					<h1>Ominaisuuksia</h1>
 					<ul>
 						<li>Kehittyneet tekstihaut</li>
 						<li>Ehdottava haku</li>
@@ -64,13 +65,13 @@
 					</ul>
 				</section>
 				<section>
-					<h2>Analysointi</h2>
+					<h1>Analysointi</h1>
 					<p>Syötetty teksti analysoidaan ennen tallentamista tietokantaan.</p>
 					<p>Ensin teksti pilkotaan osiin, ja tämän jälkeen osille suoritetaan toimintoja</p>
 					<p>Analysointi voidaan määritellä erikseen hakuun ja indeksointiin.</p>
 				</section>
 				<section>
-					<h2>Analysointi</h2>
+					<h1>Analysointi</h1>
 					<table>
 						<thead>
 							<tr>
@@ -95,12 +96,12 @@
 					</table>
 				</section>
 				<section>
-					<h2>Dokumentin tiedot</h2>
+					<h1>Dokumentin tiedot</h1>
 					<p>Dokumentissa voi olla useita eri kenttiä, jotka voidaan analysoida eri tavoin</p>
 					<p>Kenttiä voidaan käyttää rajaamaan hakutulosta, esimerkiksi kielen mukaan</p>
 				</section>
 				<section>
-					<h2>Dokumentin tallennus</h2>
+					<h1>Dokumentin tallennus</h1>
 					<table>
 						<thead>
 							<tr>
@@ -148,7 +149,7 @@
 					</table>
 				</section>
 				<section>
-					<h2>Haku</h2>
+					<h1>Haku</h1>
 					<p>Solr sisältää useita erilaisia hakuparsereita</p>
 					<p>Haun yhteydessä tapahtuu analysointi</p>
 					<p>Analysoinnin tulosten perusteella haetaan dokumentit</p>
@@ -156,7 +157,7 @@
 				</section>
 
 				<section>
-					<h2>Muita ominaisuuksia</h2>
+					<h1>Muita ominaisuuksia</h1>
 					<ul>
 						<li>Lisää samanlaisia</li>
 						<li>Sivutus</li>
@@ -164,19 +165,19 @@
 					</ul>
 				</section>
 				<section>
-					<h2>Dokumentaatio</h2>
+					<h1>Dokumentaatio</h1>
 					<p>Apache Solr Reference Guide <a href="https://cwiki.apache.org/confluence/display/solr/Apache+Solr+Reference+Guide">https://cwiki.apache.org/confluence/display/solr/Apache+Solr+Reference+Guide</a></p>
 					<p>Useita kirjoja</p>
 				</section>
 				<section>
-					<h2>Shema</h2>
+					<h1>Shema</h1>
 					<p>Schema kuvaa dokumentin kenttien nimet, tyypit, miten ne tallennetaan ja miten ne analysoidaan</p>
 					<p>Määritellään schema.xml -tiedostossa</p>
 					<p>Mahdollista määritellä myös API:lla (Managed schema)</p>
 				</section>
 				<section>
-					<h2>Shema</h2>
-					<h3>Unique Key</h3>
+					<h1>Shema</h1>
+					<h2>Unique Key</h2>
 					<pre><code>
 <uniqueKey>id</uniqueKey>
 						</code></pre>
@@ -193,8 +194,8 @@
 					</p>
 				</section>
 				<section>
-					<h2>Shema</h2>
-					<h3>Kentän määritys</h3>
+					<h1>Shema</h1>
+					<h2>Kentän määritys</h2>
 					<pre><code>
 <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true" /></field>
 						</code></pre>
@@ -261,7 +262,7 @@
 					<p>omitNorms, omitTermFreqAndPositions, omitPositions, termVectors, termPositions, termOffsets, termPayloads...</p>
 				</section>
 				<section>
-					<h2>Dynaamiset kentät</h2>
+					<h1>Dynaamiset kentät</h1>
 					<pre><code>
 <dynamicField name="*_txt_fi" type="text_fi" indexed="true" stored="false"/></dynamicField>
 						</code></pre>
@@ -270,7 +271,7 @@
 						<p>title_txt_fi, text_txt_fi</p>
 				</section>
 				<section>
-					<h2>Kentän kopiointi</h2>
+					<h1>Kentän kopiointi</h1>
 					<pre><code>
 <copyField source="*_txt_fi" dest="simple_fi"/></copyField>
 <copyField source="*_txt_fi" dest="*_txt_fi_2"/></copyField>
@@ -279,8 +280,8 @@
 						<p>Mahdollistaa saman tiedon indeksoimisen useilla eri tavoilla</p>
 				</section>
 				<section>
-					<h2>Shema</h2>
-					<h3>Kenttätyypin määritys</h3>
+					<h1>Shema</h1>
+					<h2>Kenttätyypin määritys</h2>
 					<pre><code>
 <fieldType name="string" class="solr.StrField" sortMissingLast="true"><analyzer>...</analyzer></fieldType>
 						</code></pre>
@@ -313,16 +314,16 @@
 					<p>Myös oletusarvot kentän määrityksessä oleville asioille.</p>
 				</section>
 				<section>
-					<h2>Schema</h2>
-					<h3>Analysoinnin määritys</h2>
+					<h1>Schema</h1>
+					<h2>Analysoinnin määritys</h1>
 					<p>Analysointi tutkii syötteitä sekä indeksoinnin että haun aikana</p>
 					<p>Teksti tutkitaan, pilkotaan osiin ja osia tarvittaessa muokataan, poistetaan ja lisätään</p>
 					<p>Analysointi voi tapahtua yhdellä luokalla, tai Tokenizerin ja Filtereiden linjastona</p>
 					<p>Voidaan määrittää erikseen indeksoinnille ja haulle</p>
 				</section>
 				<section>
-					<h2>Schema</h2>
-					<h3>Analysoinnin määritys</h2>
+					<h1>Schema</h1>
+					<h2>Analysoinnin määritys</h1>
 						<pre><code>
 <fieldType name="text_fi" class="solr.TextField" positionIncrementGap="100">
   <analyzer>
@@ -339,8 +340,8 @@
 			</section>
 
 			<section>
-				<h2>Schema</h2>
-				<h3>Mitä tapahtuu?</h2>
+				<h1>Schema</h1>
+				<h2>Mitä tapahtuu?</h1>
 				<p>Dokumentti A: Verokortin ja verotodistuksen palautus tapahtuu</p>
 				<p class="fragment"><code>StandardTokenizerFactory</code></p>
 				<p class="fragment">"Verokortin", "ja", "verotodistuksen", "palautus", "tapahtuu"</p>
@@ -352,8 +353,8 @@
 				<p class="fragment">"verokortti", "verotodistus", "palautus", "tapahtua"</p>
 			</section>
 			<section>
-				<h2>Schema</h2>
-				<h3>Syntynyt indeksi</h2>
+				<h1>Schema</h1>
+				<h2>Syntynyt indeksi</h1>
 					<table>
 						<thead>
 							<tr>
@@ -382,8 +383,8 @@
 					</table>
 			</section>
 			<section>
-				<h2>Schema</h2>
-				<h3>Analysoinnin määritys</h2>
+				<h1>Schema</h1>
+				<h2>Analysoinnin määritys</h1>
 				<p>Solr sisältää paljon valmiita tokenizereita ja filtereitä</p>
 				<p>Mahdollista tehdä uusia</p>
 				<p>Huomionarvoisia:
@@ -394,7 +395,7 @@
 					</ul>
 			</section>
 			<section>
-				<h2>Indeksointi</h2>
+				<h1>Indeksointi</h1>
 				<div>
 					<div style="display: inline-block; vertical-align: top;">
 						<p>Solr voi indeksoida dokumentteja useilla eri tavoilla
@@ -416,7 +417,7 @@
 			</section>
 
 			<section>
-				<h2>Haku</h2>
+				<h1>Haku</h1>
 				<div>
 					<div style="display: inline-block; vertical-align: top;">
 						<p>Hakulauseke käsitellään hakuparserilla</p>
@@ -431,7 +432,7 @@
 			</section>
 
 			<section>
-				<h2>Hakuparserit</h2>
+				<h1>Hakuparserit</h1>
 				<p>Solr sisältää useita eri hakuparsereita, joilla on erilaisia ominaisuuksia</p>
 				<p>Hakuparsereiden toimintaa säädetään parametreillä, käytetään "name=value"</p>
 				<p> Yhteisiä parametrejä
@@ -481,7 +482,7 @@
 			</section>
 
 			<section>
-				<h2>Standard Query Parser</h2>
+				<h1>Standard Query Parser</h1>
 				<p>Käyttää lucenen kyselykieltä</p>
 				<p>Parametrejä
 				<table>
@@ -523,7 +524,7 @@
 
 			<section>
 				<section>
-					<h2>DisMax Query Parser</h2>
+					<h1>DisMax Query Parser</h1>
 					<p>Yksinkertaisia hakuja ilman monimutkaista kieltä. Hyväksyy melkein mitä tahansa ilman virheitä.</p>
 					<p>Tukee "sanojen ryhmiä", +pakollisia ja -poistavia sanoja. Ei villikortteja</p>
 					<p>Maximum Disjunction, tekee alikyselyjä ja laskee niiden perusteella pisteet.</p>
@@ -582,14 +583,14 @@
 						</p>
 				  </section>
 					<section>
-						<h2>recip(rord(creationDate),1,1000,1000)</h2>
+						<h1>recip(rord(creationDate),1,1000,1000)</h1>
 						<p>recip(x,m,a,b) implementing a/(m*x+b) where m,a,b are constants, and x is any arbitrarily complex function.</p>
 						<p>When a and b are equal, and x>=0, this function has a maximum value of 1 that drops as x increases. Increasing the value of a and b together results in a movement of the entire function to a flatter part of the curve.</p>
 						<p><img src="solr_images/recip.png" />
 					</section>
 			</section>
 			<section>
-				<h2>Extended DisMax Query Parser</h2>
+				<h1>Extended DisMax Query Parser</h1>
 				<p>Parannettu versio DisMax:sta</p>
 				<p>Voi käyttää lucene -kieltä, osaa käsitellä syntaksivirheet älykkäästi.</p>
 				<p>Parametreja
@@ -635,7 +636,7 @@
 			</section>
 
 			<section>
-				<h2>Paikalliset parametrit</h2>
+				<h1>Paikalliset parametrit</h1>
 				<p>Kyselyille (q, fq, bq) voi määrittää paikallisia parametrejä
 					<ul>
 						<li>q={!q.op=AND df=title}solr rocks</li>
@@ -652,7 +653,7 @@
 			</section>
 
 			<section>
-				<h2>Response Writer</h2>
+				<h1>Response Writer</h1>
 				<p>Response Writer kirjoittaa tuloksen</p>
 				<p>määritellään parameterillä "wt"</p>
 				<p>Useita erilaisia: xml, json, php, ruby, php, csv</p>
@@ -660,7 +661,7 @@
 			</section>
 
 			<section>
-				<h2>RequestHandler</h2>
+				<h1>RequestHandler</h1>
 				<p>RequestHandler käsittelee Solr:n saapuvia pyyntöjä</p>
 				<p>Useita eri tyyppejä
 					<ul>
@@ -674,7 +675,7 @@
 				</p>
 			</section>
 			<section>
-				<h2>SearchHandler</h2>
+				<h1>SearchHandler</h1>
 				<pre><code>
 <requestHandler name="/select" class="solr.SearchHandler">
   <lst name="defaults">
@@ -686,7 +687,7 @@
 				<p>RequestHandler, joka ottaa kaikki parametrit kyselyn mukana.
 			</section>
 			<section>
-				<h2>SearchHandler</h2>
+				<h1>SearchHandler</h1>
 				<pre><code>
 <requestHandler name="/stocked" class="solr.SearchHandler">
   <lst name="defaults">
@@ -704,14 +705,14 @@
 			<p>Oletusarvo, lisää fq:n ja pakottaa fl:n</p>
 			</section>
 			<section>
-				<h2>SearchComponent</h2>
+				<h1>SearchComponent</h1>
 				<p>SearchComponent on hakuun liittyvä ominaisuus, kuten faceting, merkkaus.</p>
 				<p>Jokainen ottaa vastaan omia parametrejä, ja lisää vastaukseen oman osuuden.</p>
 				<p>Käyttäminen saattaa vaatia muutoksia indeksointiin.</p>
 				<p>SearchComponentit rekisteröidään RequestHandleriin.</p>
 			</section>
 			<section>
-				<h2>SearchComponent</h2>
+				<h1>SearchComponent</h1>
 				<p>Oletuksena RequestHandlerilla on seuraavat SearchComponentit</p>
 				<table>
 					<thead>
@@ -754,7 +755,7 @@
 				<p>Oletuskomponentit voi ylikirjoittaa omilla</p>
 			</section>
 			<section>
-				<h2>SearchComponent rekisteröinti</h2>
+				<h1>SearchComponent rekisteröinti</h1>
 				<p>SearchComponent rekisteröidään Request Handleriin. Oletuskomponentteja ei enää käytetä</p>
 				<pre><code>
 <requestHandler name="/terms" class="solr.SearchHandler">
@@ -769,7 +770,7 @@
 				</code></pre>
 			</section>
 			<section>
-				<h2>InitParams</h2>
+				<h1>InitParams</h1>
 				<p>RequestHandlerin parametrejä voi määritellä myös initParams -määritteellä</p>
 				<pre><code>
 <initParams name="default_init" path="/update/**,/query/*,/select,/tvrh,/elevate,/spell,/browse">
@@ -781,13 +782,13 @@
 				<p>Ovat käytössä joko path -määrittelyn perusteella tai eksplisiittisesti nimen kautta</p>
 			</section>
 			<section>
-				<h2>Yhteenveto</h2>
+				<h1>Yhteenveto</h1>
 				<p>
 					<img src="solr_images/summary.svg"
 				</p>
 			</section>
 			<section>
-				<h2>Yhteenveto</h2>
+				<h1>Yhteenveto</h1>
 				<p>Äärimmäisen monipuolinen, ja sen vuoksi, monimutkainen järjestelmä</p>
 				<p>"Järkeviä oletusarvoja" ei käytännössä ole</p>
 				<p>Tulosten oikeellisuus ei ole absoluuttinen arvo</p>
@@ -807,9 +808,11 @@
 				controls: true,
 				progress: true,
 				history: true,
-				center: true,
+				center: false,
+				width: 1152,
+				height: 648,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [
