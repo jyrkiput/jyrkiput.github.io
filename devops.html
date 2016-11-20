@@ -1,0 +1,337 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>DevOps</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/symbio.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+        <section data-state="title">
+          <h1>DevOps</h1>
+          <h3>jyrki.puttonen@symbio.com / <a href="https://twitter.com/jyrkiput">@jyrkiput</a></h3>
+        </section>
+				<section>
+          <h1>DevOps?</h1>
+          <img src="devops_images/devopsengineer.jpg"/>
+          <div class="reference">http://www.slideshare.net/madgreek65/no-you-are-not-a-dev-ops-engineer-revisted</div>
+        </section>
+        <section>
+          <h1>DevOps?</h1>
+          <img src="devops_images/devop_title.jpg"/>
+          <div class="reference">https://memegenerator.net/instance/61788966</div>
+        </section>
+        <section>
+          <h1>DevOps?</h1>
+          <img src="devops_images/south_park.jpg"/>
+          <div class="reference">http://www.slideshare.net/SaltStack/justin-carmony-mentoring-devs-into-dev-ops-saltconf</div>
+        </section>
+        <section>
+          <h1>DevOps?</h1>
+          <img src="devops_images/skeptic.jpg"/>
+          <div class="reference">https://devops.com/devops-dirty-little-secrets/</div>
+        </section>
+        <section>
+          <h1>State of Devops</h1>
+          <img src="devops_images/puppet2015.png" height=400em />
+          <img src="devops_images/puppet_2016.png" width=500em />
+          <aside class="notes">
+              They were not asked "Do you devop", only what they did
+          </aside>
+        </section>
+        <section>
+          <h1>State of Devops 2015 - High performers vs low performers</h1>
+          <p class="fragment">30x more frequent deployments</p>
+          <p class="fragment">60x the change success rate</p>
+          <p class="fragment">2x more likely to exceed profitability, market share &amp; productivity goals</p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+        <section>
+          <h1>State of Devops 2015 - High performers vs low performers</h1>
+          <p class="fragment">200x faster lead times</p>
+          <p class="fragment">168x faster mean time to recover</p>
+          <p class="fragment">50% higher market capitalization growth over 3 years</p>
+          <aside class="notes">
+            Market capitalization = share value * outstanding share amount
+          </aside>
+        </section>
+        <section>
+          <h1>Devops</h1>
+          <p class="fragment fade-out">Faster, Higher Quality, More effective</p>
+          <p class="fragment fade-in">Faster, Higher Quality, Cheaper</p>
+          <aside class="notes">
+            From Concept to cash
+            Optimize for speed, not for cost
+          </aside>
+        </section>
+        <section>
+          <h1>CALMS</h1>
+          <p class="fragment">Culture</p>
+          <p class="fragment">Automation</p>
+          <p class="fragment">Lean</p>
+          <p class="fragment">Measurement</p>
+          <p class="fragment">Sharing</p>
+        </section>
+        <section>
+          <h1>Culture</h1>
+          <img src="devops_images/corporate-culture-comics-improve-culture.png">
+          <aside class="notes">
+            **Culture is not fuzzy**
+
+            Culture is not something you can implement, it is always present in environment.
+            Culture affects everything.
+            In culture, where automation, lean, measuring and sharing are appreciated, they will happen.
+          </aside>
+        </section>
+        <section>
+          <h1>Empathy</h1>
+          <img src="devops_images/empathy.jpg" height="400px">
+          <div class="reference">https://dzone.com/articles/how-express-empathy-%E2%80%93-avoid</div>
+          <aside class="notes">
+              Empathy as center of Devops practice puts the highlight on relationships between people.
+              In a way, devops is similar to systems thinking, where connections between participants
+              are valued as important as participants themselves.
+          </aside>
+        </section>
+        <section>
+          <h1>Automation</h1>
+          <img src="devops_images/automate.jpg">
+          <div class="reference">https://memegenerator.net/instance/37097963</div>
+          <aside class="notes">
+            **Automate everything!**
+            Reduce manual work and errors
+
+            Automation uncovers errors
+
+            Automation enables new workflows
+          </aside>
+        </section>
+        <section>
+          <h1>Lean</h1>
+          <img src="devops_images/lean.png" height="400px">
+          <div class="reference">By <a href="https://nl.wikipedia.org/wiki/User:Laurensvanlieshout" class="extiw" title="nl:User:Laurensvanlieshout">Laurensvanlieshout</a> from <a href="https://nl.wikipedia.org/wiki/" class="extiw" title="nl:">nl</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=1851969">Link</a></div>
+          <aside class="notes">
+            Toyota Production system
+
+            Remove waste, non value adding things
+
+            Muda, Muri, Mura
+            Waste, Overburden, Uneveness
+          </aside>
+        </section>
+        <section>
+          <h1>Measurement</h1>
+          <img src="devops_images/dashboard_ex1.png" height="400px">
+          <div class="reference">http://grafana.org/features/</div>
+          <aside class="notes">
+            Measurement is about visibility. When everything is automated, it is easy to forgot what is really happening. If there isn't visibility, something will eventually go wrong
+
+            Not only boring technical values, business has also needs
+          </aside>
+        </section>
+        <section>
+          <h1>Sharing</h1>
+          <img src="devops_images/sharing.jpg" height="400px">
+          <div class="reference">http://langwitches.org/blog/2010/12/07/what-do-you-have-to-lose/</div>
+          <aside class="notes">
+            A lot of things can be shared, like tools, lessons learned, metrics and practices.
+            Sharing has been great in Devops community, where a lot of tools are open source,
+            conferences are abundant and people are open about problems they've been facing.
+          </aside>
+        </section>
+        <section>
+          <h1>Three ways of Devops</h1>
+          <p>First way: The Principles of Flow</p>
+          <p>Second way: The Principles of Feedback</p>
+          <p>Thirdh way: The Principles of Continual Experimentation and Learning</p>
+        </section>
+        <section>
+          <h1>The Principles of Flow</h1>
+          <img src="devops_images/first-way.png" height="400px">
+          <div class="reference">http://itrevolution.com/the-three-ways-principles-underpinning-devops/</div>
+          <aside class="notes">
+            In first way, the emphasis is on the performance of whole system.
+
+            The focus is in business value streams, that are enabled by IT.
+            In simplest form, the stream starts when a requirement is identified,
+            then passed to development and finally deployed into production.
+
+            "From right to left"
+
+            The outcomes of putting the First Way into
+            never passing a known defect to downstream work centers,
+            never allowing local optimization to create global degradation,
+            always seeking to increase flow, and always seeking to achieve
+            profound understanding of the system (as per Deming).
+
+          </aside>
+        </section>
+        <section>
+          <h1>The Principles of Feedback</h1>
+          <img src="devops_images/second-way.png" height="400px">
+          <div class="reference">http://itrevolution.com/the-three-ways-principles-underpinning-devops/</div>
+          <aside class="notes">
+            In second way, feedback loops are created from downstream to upstream.
+            In other words, from customers, be they internal or external
+            (operations or end users) back to start of flow.
+
+            The outcomes of the Second Way include understanding and
+            responding to all customers, internal and external,
+            shortening and amplifying all feedback loops, and embedding
+            knowledge where we need it.
+
+            "From right to left"
+
+          </aside>
+        </section>
+        <section>
+          <h1>The Principles of Continual Experimentation and Learning</h1>
+          <img src="devops_images/third-way.png" height="400px">
+          <div class="reference">http://itrevolution.com/the-three-ways-principles-underpinning-devops/</div>
+          <aside class="notes">
+            The final way emphasizes culture. This culture fosters two things
+
+            1. Continual experimentation, taking risks and learning from failure
+            2. Understanding that repetition and practice is the prerequisite to mastery.
+
+            The outcomes of the Third Way include allocating time for the improvement of daily work,
+            creating rituals that reward the team for taking risks, and introducing faults into the
+            system to increase resilience.
+          </aside>
+        </section>
+        <section>
+          <h1>One way to enable Devops</h1>
+
+          <p>Organization structure that stays out of the way</p>
+
+          <p>Build everything through a Software Defined Lifecycle (SDLC)</p>
+
+          <p>Make the work visible</p>
+
+          <p>Immutable Infrastructure Delivery</p>
+
+          <p>Microservices</p>
+
+          <p>Respect for People</p>
+
+        </section>
+        <section>
+          <h1>Organization structure that stays out of the way</h1>
+          <img src="devops_images/silos.png" height="400px" />
+          <div class="reference">http://www.slideshare.net/botchagalupe/does16-london-better-faster-cheaper-how</div>
+        </section>
+        <section>
+          <h1>Organization structure that stays out of the way</h1>
+          <img src="devops_images/org.png" height="400px" />
+          <div class="reference">http://www.slideshare.net/botchagalupe/does16-london-better-faster-cheaper-how</div>
+        </section>
+        <section>
+          <h1>Build everything through a Software Defined Lifecycle (SDLC)</h1>
+          <img src="devops_images/cfgmgmt.jpg" height="400px" />
+          <div class="reference">http://www.slideshare.net/botchagalupe/does16-london-better-faster-cheaper-how</div>
+        </section>
+        <section>
+          <h1>Make the work visible</h1>
+          <img src="devops_images/valuestream.jpg" height="400px" />
+          <div class="reference">http://flylib.com/books/en/4.318.1.31/1/</div>
+        </section>
+        <section>
+          <h1>Make the work visible</h1>
+          <img src="devops_images/kanban_swimlane.png" height="400px" />
+          <div class="reference">http://leansoftwareengineering.com/2009/07/01/a-swimlane-for-ad-hoc-workflow/</div>
+        </section>
+        <section>
+          <h1>Immutable Infrastructure Delivery</h1>
+          <img src="devops_images/docker.png" height="400px" />
+        </section>
+        <section>
+          <h1>Microservices</h1>
+          <p class="fragment">
+            Small autonomous services that work together - Sam Newman
+          </p>
+          <p class="fragment">
+          <span style="color: red;">Loosely coupled</span> service oriented architecture with
+          <span style="color: red;">bounded contexts</span>
+            - Adrian Cockroft
+          </p>
+          <p class="fragment">
+            <img src="devops_images/microservices.jpg" height=300px/><br/>
+            <span class="reference">http://www.slideshare.net/BruceWong3/the-case-for-chaos</span>
+          </p>
+          <aside class="notes">
+            Bounded Context is a central pattern in Domain-Driven Design. It is the focus of DDD's strategic design section which is all about dealing with large models and teams. DDD deals with large models by dividing them into different Bounded Contexts and being explicit about their interrelationships.
+          </aside>
+        </section>
+        <section>
+          <h1>Respect for People</h1>
+          <p>High performers care for their people like strategic assets</p>
+          <p>It's not just humane, it's a business advantage</p>
+          <p class="fragment">Diversity, Empathy</p>
+          <p class="fragment">Areas of Worklife: Workload, Control, Reward, Community, Fairness, Values</p>
+          <aside class="notes">
+            The Truth About Burnout identifies six areas of the work environment that are considered the most relevant to the relationships people develop with their work. A mismatch between people and their work environment in these areas reduces their capacity for energy, involvement, and a sense of effectiveness. Matches in these areas enhance engagement.
+          </aside>
+        </section>
+        <section>
+          <h1>Not only for Startups</h1>
+          <img src="devops_images/unicorn.jpg" height=400px />
+        </section>
+        <section>
+          <h1>High performing DevOps elephant</h1>
+          <img src="devops_images/devopselephant.jpg"height=400px />
+          <aside class="notes">
+            Not only for silicon valley startups
+            Started in Ghent
+            Barclays does it
+          </aside>
+        </section>
+        <section>
+          <h1>Thank you</h1>
+          <p>For more information, see videos from DevOpsDays and Devops Enterprise Summit</p>
+        </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+        center: false,
+				width: 1152,
+				height: 648,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
