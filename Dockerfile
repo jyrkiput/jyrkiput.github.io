@@ -1,9 +1,8 @@
-FROM node:0.10
+FROM node:alpine
 RUN git clone https://github.com/hakimel/reveal.js.git
-RUN cd reveal.js && npm install
-RUN npm install -g grunt-cli
-ADD theme_images /reveal.js/theme_images
-ADD symbio.css /reveal.js/css/theme/symbio.css
 WORKDIR /reveal.js/
-ENTRYPOINT ["grunt", "serve"]
+RUN  npm install
+ADD theme_images /reveal.js/theme_images
+ADD css/theme/symbio.css /reveal.js/css/theme/symbio.css
+ENTRYPOINT ["npm", "start"]
 EXPOSE 8000
